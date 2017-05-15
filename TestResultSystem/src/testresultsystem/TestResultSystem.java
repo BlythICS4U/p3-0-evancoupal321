@@ -62,7 +62,8 @@ public class TestResultSystem {
     public static void main(String[] args) {
         
         Teacher teacher = new Teacher("007", "Chris", 35, new String[]{"CS", "Math", "Physics"});
-        Course csCourse = new Course("ICS4U", "Grade 12 Computer Science", teacher);
+        Course csCourse = new Course("ICS4U", "Grade 12 Computer Science");
+        csCourse.setTeacher(teacher);
         
         System.out.println("Welcome to the Test Result System");
         

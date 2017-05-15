@@ -12,7 +12,7 @@ public class Course {
     
     private final String description; // Course description
     
-    private final Teacher teacher; // Course's teacher data
+    private Teacher teacher; // Course's teacher data
     
     private final Student[] students = new Student[30]; // Students enrolled in course
     
@@ -22,12 +22,10 @@ public class Course {
      * Constructor
      * @param name Course name
      * @param description Course description
-     * @param teacher Course teacher
      */
-    public Course(String name, String description, Teacher teacher) {
+    public Course(String name, String description) {
         this.name = name;
         this.description = description;
-        this.teacher = teacher;
     }
 
     /**
@@ -52,6 +50,10 @@ public class Course {
      */
     public Teacher getTeacher() {
         return teacher;
+    }
+    
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     /**
