@@ -17,15 +17,18 @@ public class Course {
     private final Student[] students = new Student[30]; // Students enrolled in course
     
     private int numStudents = 0; // Number of students enrolled
+    
+    private String subject;
 
     /**
      * Constructor
      * @param name Course name
      * @param description Course description
      */
-    public Course(String name, String description) {
+    public Course(String name, String description, String subject) {
         this.name = name;
         this.description = description;
+        this.subject = subject;
     }
 
     /**
@@ -52,8 +55,20 @@ public class Course {
         return teacher;
     }
     
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public boolean setTeacher(Teacher teacher) {
+        String[] subjects = teacher.getSubjects();
+        for (int i = 0; i < subjects.length; i++)
+        {
+            if (subjects[i] != null)
+            {
+                if (subjects[i].equals(this.subject))
+                {
+                    this.teacher = teacher;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -91,9 +106,22 @@ public class Course {
     /**
      * Enroll a student in the course
      * @param student Data for the student to enroll
+     * @return true If the student was added successfully
      */
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
+        for (int i = 0; i < numStudents; i++)
+        {
+            if (this.students[i].getId().equals(student.getId()))
+            {
+                return false;
+            }
+        }
+        if (this.numStudents >= 30)
+        {
+            return false;
+        }
         this.students[this.numStudents] = student;
         this.numStudents++;
+        return true;
     }
 }

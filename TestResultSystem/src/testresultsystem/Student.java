@@ -50,10 +50,19 @@ public class Student extends Person {
     /**
      * Record a test result for this student
      * @param result Test result to record
+     * @return true If the test result was added successfully, false if not
      */
-    public void addTestResult(TestResult result) {
-        this.results[this.numResults] = result;
-        this.numResults++;
+    public boolean addTestResult(TestResult result) {
+        if (this.numResults >= 10)
+        {
+            return false;
+        }
+        else
+        {
+            this.results[this.numResults] = result;
+            this.numResults++;
+            return true;
+        }
     }
     
     /**
@@ -67,6 +76,33 @@ public class Student extends Person {
         } else {
             return null;
         }
+    }
+    
+    /**
+     * Get a student's average test score
+     * @return average The student's average score
+     */
+    public double getAverage()
+    {
+        int numTests = this.getNumTestResults();
+        double average = 0;
+        int totalWeight = 0;
+        TestResult[] tests = this.getTestResults();
+        for (int i = 0; i < tests.length; i++) //Calculate total weight
+        {
+            if (tests[i] != null)
+            {
+                totalWeight += tests[i].getWeight();
+            }
+        }
+        for (int i = 0; i < tests.length; i++) //Calculate average
+        {
+            if (tests[i] != null)
+            {
+                average += (double)tests[i].getWeight()/totalWeight * tests[i].getScore();
+            }
+        }
+        return average;
     }
     
 }
